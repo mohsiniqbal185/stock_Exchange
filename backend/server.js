@@ -5,8 +5,6 @@ const path = require("path")
 const dotenv = require('dotenv');
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-// const session = require("express-session");
-const {connection} = require('./config/db')
 app.use(cors({credentials: true}));
 app.use(express.json());
 app.use(express.urlencoded({ extended : false }));  
@@ -21,3 +19,5 @@ app.get('/', (req, res) => {
 app.use('/get_stock_closing_prices', require('./routes/getstockDataRoute'));
 
 app.listen(port, () => console.log(`welcome to the server `+port));
+
+
