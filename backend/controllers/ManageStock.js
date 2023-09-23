@@ -8,6 +8,7 @@ async function insertStockinDB(apiKey, tickerSymbol, startDate, endDate, resultA
   const formattedData = [];
 
   try {
+    //get data from polygon api
     const dataFromPolygon = await fetchDataFromPolygon(apiKey, tickerSymbol, startDate, endDate);
 
     const formattedData = dataFromPolygon.results.map((item) => ({
@@ -24,6 +25,7 @@ async function insertStockinDB(apiKey, tickerSymbol, startDate, endDate, resultA
     }
 
     const bulkArray = [];
+    //push missing data into bulkArray
     for (let date of dateArray) {
       if (!resultArray.find((item) => item.date === date)  ) {
         const matchingData = formattedData.find((item) => item.date === date);
@@ -34,7 +36,7 @@ async function insertStockinDB(apiKey, tickerSymbol, startDate, endDate, resultA
         });
       }
     }
-
+    //push missing data in DB
     await StockExchangeData.bulkCreate(bulkArray);
     console.log('All data inserted.');
     return formattedData;

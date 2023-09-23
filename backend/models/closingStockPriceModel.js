@@ -5,6 +5,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 //     host: 'localhost',
 //     dialect: 'mysql', // Specify the dialect for MySQL
 // });
+//Database Config
 const dbConfig = {
     host: process.env.DB_HOST || 'mysql',
     username: process.env.DB_USER || 'user',
@@ -18,7 +19,7 @@ const dbConfig = {
       idle: 10000,
     },
   };
-  
+  //Sequelize Connection
   const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, dbConfig);
 
 // Test the database connection
@@ -30,6 +31,7 @@ async function testDatabaseConnection() {
         console.error('Unable to connect to the database:', error);
     }
 }
+// Define Stock Data
 const StockExchangeData = sequelize.define('stock_exchange_data', {
     ticker_symbol: {
         type: DataTypes.STRING,

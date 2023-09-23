@@ -4,7 +4,7 @@ const axios = require('axios');
 
 async function fetchDataFromPolygon(apiKey, tickerSymbol, startDate, endDate) {
   try {
-
+    //Get data from Polygon API
     const apiUrl = `https://api.polygon.io/v2/aggs/ticker/${tickerSymbol}/range/1/day/${startDate}/${endDate}?apiKey=${apiKey}`;
     const response = await axios.get(apiUrl);
 
